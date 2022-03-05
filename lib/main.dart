@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_practise_app/network/location.dart';
@@ -42,7 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
     data = await getData(address);
     icon = data['weather'][0]['icon'];
     url = 'http://openweathermap.org/img/wn/$icon@2x.png';
-    print(data);
     _isLoading = false;
     setState(() {});
   }
@@ -75,11 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
             initialValue: 0,
             itemBuilder: (context) {
               return [
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 1,
                   child: Text('Change City'),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: 2,
                   child: Text('Settings'),
                 ),
@@ -91,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Change City'),
+                        title: const Text('Change City'),
                         content: Form(
                           key: key,
                           child: TextFormField(
@@ -104,7 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               address = city.text;
                               setState(() {});
                             },
-                            decoration: InputDecoration(hintText: 'Enter City'),
+                            decoration:
+                                const InputDecoration(hintText: 'Enter City'),
                           ),
                         ),
                         actions: [
@@ -118,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   getCity();
                                 }
                               },
-                              child: Text('Change'))
+                              child: const Text('Change'))
                         ],
                       );
                     });
@@ -127,13 +126,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     MaterialPageRoute(builder: (context) => SettingsScreen()));
               }
             },
-            icon: Icon(Icons.more_vert, color: Colors.grey),
+            icon: const Icon(Icons.more_vert, color: Colors.grey),
           ),
         ],
         backgroundColor: Colors.white,
       ),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(
               color: Colors.black,
             ))
@@ -150,41 +149,41 @@ class _MyHomePageState extends State<MyHomePage> {
                       data['name'],
                       style: const TextStyle(fontSize: 28, color: Colors.black),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       data['weather'][0]['description']
                           .toString()
                           .toUpperCase(),
-                      style: TextStyle(fontSize: 24, letterSpacing: 4),
+                      style: const TextStyle(fontSize: 24, letterSpacing: 4),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Image.network(url),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text.rich(TextSpan(
                         text: data['main']['temp'].toString().substring(
                             0, data['main']['temp'].toString().indexOf('.')),
-                        style: TextStyle(fontSize: 100),
-                        children: [TextSpan(text: '°')])),
-                    SizedBox(
+                        style: const TextStyle(fontSize: 100),
+                        children: const [TextSpan(text: '°')])),
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         buildColumn('max', data['main']['temp_max']),
-                        VerticalDividerWidget(),
+                        const VerticalDividerWidget(),
                         buildColumn('min', data['main']['temp_min'])
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.grey,
                       endIndent: 20,
                       indent: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -192,25 +191,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'wind speed',
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(data['wind']['speed'].toString() + ' m/s',
-                                style: TextStyle(fontSize: 16))
+                                style: const TextStyle(fontSize: 16))
                           ],
                         ),
-                        VerticalDividerWidget(),
+                        const VerticalDividerWidget(),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'sunrise',
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                                 DateFormat.Hm()
                                         .format(
@@ -218,18 +217,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 data['sys']['sunrise']))
                                         .toString() +
                                     ' AM',
-                                style: TextStyle(fontSize: 16))
+                                style: const TextStyle(fontSize: 16))
                           ],
                         ),
-                        VerticalDividerWidget(),
+                        const VerticalDividerWidget(),
                         Column(
                           children: [
                             Text(
                               'sunset',
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 20),
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 20),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                                 DateFormat.Hm()
                                         .format(
@@ -237,20 +236,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 data['sys']['sunset']))
                                         .toString() +
                                     ' PM',
-                                style: TextStyle(fontSize: 16)),
+                                style: const TextStyle(fontSize: 16)),
                           ],
                         ),
-                        VerticalDividerWidget(),
+                        const VerticalDividerWidget(),
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               'humidity',
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 20),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(data['main']['humidity'].toString() + ' %',
-                                style: TextStyle(fontSize: 16))
+                                style: const TextStyle(fontSize: 16))
                           ],
                         ),
                       ],
@@ -267,11 +266,11 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Text(
           text,
-          style: TextStyle(color: Colors.grey, fontSize: 18),
+          style: const TextStyle(color: Colors.grey, fontSize: 18),
         ),
-        SizedBox(height: 10),
-        Text.rich(
-            TextSpan(text: data.toString(), children: [TextSpan(text: '°')]))
+        const SizedBox(height: 10),
+        Text.rich(TextSpan(
+            text: data.toString(), children: const [TextSpan(text: '°')]))
       ],
     );
   }
@@ -284,7 +283,7 @@ class VerticalDividerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       height: 35,
       child: VerticalDivider(
         color: Colors.grey,
