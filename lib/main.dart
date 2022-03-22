@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -147,7 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(height: height * 0.1),
                     Text(
                       data['name'],
-                      style: const TextStyle(fontSize: 28, color: Colors.black),
+                      style: const TextStyle(
+                          fontSize: 28,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
                     Text(
